@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lionel Messi | The Eternal Legacy</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;900&family=Montserrat:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        gold: {
+                            light: '#E6D3A3',
+                            DEFAULT: '#C5A059',
+                            dark: '#8F733F',
+                            muted: '#5A4A28'
+                        },
+                        ink: {
+                            900: '#070707',
+                            800: '#0F0F0F',
+                            700: '#1A1A1A',
+                        }
+                    },
+                    backgroundImage: {
+                        'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --cursor-size: 20px;
+        }
+
+        body {
+            background-color: #070707;
+            color: #E0E0E0;
+            overflow-x: hidden;
+        }
+
+        /* Subtle Film Grain Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.035;
+            background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        }
+
+        /* Editorial Typography Styling */
+        .title-outline {
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(197, 160, 89, 0.4);
+        }
+
+        /* Image Masking for Cinematic Fades */
+        .mask-right {
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 40%, black 100%);
+            mask-image: linear-gradient(to right, transparent 0%, black 40%, black 100%);
+        }
+        
+        .mask-left {
+            -webkit-mask-image: linear-gradient(to left, transparent 0%, black 50%, black 100%);
+            mask-image: linear-gradient(to left, transparent 0%, black 50%, black 100%);
+        }
+
+        .mask-bottom {
+            -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+        }
+
+        .mask-radial {
+            -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+            mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+        }
+
+        @media (max-width: 768px) {
+            .mask-right, .mask-left {
+                -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 100%);
+                mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 100%);
+            }
+        }
+
+        /* Smooth Scroll Reveals */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s cubic-bezier(0.2, 1, 0.3, 1), transform 1.2s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        
+        .reveal-up.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 1.5s cubic-bezier(0.2, 1, 0.3, 1), transform 1.5s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        .reveal-scale.in-view {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .stagger-1 { transition-delay: 100ms; }
+        .stagger-2 { transition-delay: 250ms; }
+        .stagger-3 { transition-delay: 400ms; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #070707; }
+        ::-webkit-scrollbar-thumb { background: #1A1A1A; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #C5A059; }
+
+        /* Subtle line decorative element */
+        .gold-line {
+            position: relative;
+        }
+        .gold-line::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 1px;
+            background-color: #C5A059;
+            transition: width 0.5s ease;
+        }
+        .gold-line:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="font-montserrat">
+
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+
+    <nav class="fixed w-full z-50 mix-blend-difference px-6 md:px-12 py-8 flex justify-between items-center transition-all duration-500" id="navbar">
+        <a href="#" class="font-cinzel text-xl text-white tracking-[0.2em] font-medium">LIONEL<br><span class="text-gold-light text-sm">MESSI</span></a>
+        <div class="hidden md:flex space-x-12 text-xs font-medium tracking-widest uppercase">
+            <a href="#prologue" class="text-white hover:text-gold-light gold-line transition">Prologue</a>
+            <a href="#journey" class="text-white hover:text-gold-light gold-line transition">The Journey</a>
+            <a href="#glory" class="text-white hover:text-gold-light gold-line transition">Glory</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="relative min-h-screen flex items-center pt-20 pb-12 overflow-hidden">
+            <!-- Background Elements -->
+            <div class="absolute inset-0 z-0">
+                <div class="absolute top-0 right-0 w-full md:w-1/2 h-full bg-ink-800 transform md:skew-x-12 md:translate-x-32 opacity-50"></div>
+            </div>
+
+            <!-- 50/50 Grid Layout for Hero -->
+            <div class="container mx-auto px-6 md:px-12 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center min-h-screen pt-24 md:pt-0">
+                
+                <!-- Hero Typography -->
+                <div class="w-full z-20 flex flex-col justify-center">
+                    <p class="font-cinzel text-gold tracking-[0.3em] uppercase text-xs mb-6 reveal-up">2004 &mdash; 2026</p>
+                    <h1 class="font-cinzel text-6xl md:text-[6.5vw] leading-[1.1] font-black text-white relative z-20 reveal-up stagger-1">
+                        THE <br>
+                        <span class="md:ml-12 text-gold-light">ETERNAL</span><br>
+                        <span class="title-outline">LEGACY</span>
+                    </h1>
+                    <div class="mt-12 md:ml-12 flex items-center gap-6 reveal-up stagger-2">
+                        <div class="h-[1px] w-16 bg-gold-dark"></div>
+                        <p class="text-sm font-light text-gray-400 max-w-xs leading-relaxed italic">
+                            "I prefer to win titles with the team ahead of individual awards or scoring more goals than anyone else."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Hero Image (Clearly Separated) -->
+                <div class="w-full h-[50vh] md:h-[75vh] relative z-10 reveal-scale flex items-center justify-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg" 
+                         alt="Lionel Messi Argentina" 
+                         class="w-full h-full object-contain md:object-cover rounded-2xl mask-radial opacity-90 filter contrast-125 grayscale-[20%]">
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-6 left-6 md:left-12 z-20 flex flex-col items-center gap-4 reveal-up stagger-3">
+                <span class="text-[10px] tracking-widest text-gray-500 uppercase rotate-90 mb-6">Scroll</span>
+                <div class="w-[1px] h-12 bg-gradient-to-b from-gold-dark to-transparent"></div>
+            </div>
+        </section>
+
+        <section id="prologue" class="py-32 bg-ink-900 relative border-t border-ink-800">
+            <div class="container mx-auto px-6 md:px-12">
+                <div class="max-w-4xl mx-auto flex flex-col md:flex-row gap-12 md:gap-24 items-start">
+                    <h2 class="font-cinzel text-3xl md:text-5xl text-white font-medium leading-tight md:w-1/2 reveal-up">
+                        An era defined by <span class="italic text-gold">impossible</span> magic, brought to a poetic close.
+                    </h2>
+                    <div class="md:w-1/2 reveal-up stagger-1">
+                        <p class="text-gray-400 font-light leading-loose text-sm md:text-base mb-6">
+                            Football is a game of moments, but for over two decades, Lionel Andrés Messi turned it into an endless exhibition of art. From a boy in Rosario facing overwhelming physical odds, to the undisputed king of the sport.
+                        </p>
+                        <p class="text-gray-400 font-light leading-loose text-sm md:text-base">
+                            In October 2026, the boots that painted a thousand masterpieces were finally unlaced. This is the timeline of the greatest story ever told on grass.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="journey" class="py-32 relative bg-ink-800">
+            <div class="container mx-auto px-6 md:px-12 relative z-10">
+                <h3 class="font-cinzel text-xs text-gold tracking-[0.4em] uppercase mb-24 text-center reveal-up">The Timeline</h3>
+
+                <div class="max-w-6xl mx-auto relative flex flex-col gap-32">
+
+                    <!-- Timeline Item 1: Rosario (Grid Layout) -->
+                    <article class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center reveal-up">
+                        <div class="order-2 md:order-1 text-left md:text-right">
+                            <span class="font-cinzel text-4xl text-gold-muted font-bold block mb-4">1987</span>
+                            <h4 class="font-cinzel text-2xl text-white mb-4">The Boy from Rosario</h4>
+                            <p class="text-gray-400 font-light text-sm leading-relaxed">
+                                Born in Santa Fe, Argentina. Diagnosed with a growth hormone deficiency, his sheer talent was too vast for his small frame to contain. A grandmother's unwavering belief sparked the journey.
+                            </p>
+                        </div>
+                        <div class="order-1 md:order-2 w-full h-72 md:h-96 bg-ink-900 overflow-hidden relative rounded-2xl border border-ink-700 shadow-2xl">
+                            <img src="LM1.jpg" alt="Rosario pitch" class="w-full h-full object-cover object-top opacity-100 hover:scale-105 transition duration-700">
+                        </div>
+                    </article>
+
+                    <!-- Timeline Item 1.5: GHD Diagnosis -->
+                    <article class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center reveal-up">
+                        <div class="order-1 md:order-1 w-full h-72 md:h-96 bg-ink-900 overflow-hidden relative rounded-2xl border border-ink-700 shadow-2xl">
+                            <img src="LM2.jpg" alt="Early Struggle" class="w-full h-full object-cover object-top opacity-100 hover:scale-105 transition duration-700 filter contrast-110">
+                        </div>
+                        <div class="order-2 md:order-2 text-left">
+                            <span class="font-cinzel text-4xl text-gold-muted font-bold block mb-4">1998</span>
+                            <h4 class="font-cinzel text-2xl text-white mb-4">The Greatest Obstacle</h4>
+                            <p class="text-gray-400 font-light text-sm leading-relaxed">
+                                At age 11, Messi was diagnosed with Growth Hormone Deficiency (GHD). His immense talent was trapped inside a body that refused to grow. The exorbitant cost of daily injections threatened to end his footballing dream before it even began, as local Argentine clubs hesitated to cover the medical bills.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Timeline Item 2: Barcelona -->
+                    <article class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center reveal-up">
+                        <div class="order-2 md:order-1 text-left md:text-right">
+                            <span class="font-cinzel text-4xl text-gold-muted font-bold block mb-4">2000 — 2021</span>
+                            <h4 class="font-cinzel text-2xl text-white mb-4">The Blaugrana Symphony</h4>
+                            <p class="text-gray-400 font-light text-sm leading-relaxed mb-4">
+                                FC Barcelona agreed to pay for his medical treatment, and a contract on a napkin birthed an empire. He debuted at 17 and went on to redefine the club, delivering countless iconic moments—including holding his shirt aloft at the Bernabéu.
+                            </p>
+                            <p class="text-gold-dark text-xs uppercase tracking-widest font-semibold">672 Goals &middot; 4 UCLs</p>
+                        </div>
+                        <div class="order-1 md:order-2 w-full h-72 md:h-96 bg-ink-900 overflow-hidden relative rounded-2xl border border-ink-700 shadow-2xl">
+                            <img src="LM3.jpg" alt="Messi Barcelona" class="w-full h-full object-cover opacity-100 hover:scale-105 transition duration-700">
+                        </div>
+                    </article>
+
+                    <!-- Timeline Item 3: World Cup Glory -->
+                    <article class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center reveal-up">
+                        <div class="order-1 md:order-1 w-full h-72 md:h-96 bg-ink-900 overflow-hidden relative rounded-2xl border border-ink-700 shadow-2xl group">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Lionel_Messi_WC2022.jpg" alt="Messi World Cup Trophy" class="w-full h-full object-cover opacity-100 group-hover:scale-110 transition duration-1000 filter brightness-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-ink-900 via-transparent to-transparent opacity-40"></div>
+                        </div>
+                        <div class="order-2 md:order-2 text-left">
+                            <span class="font-cinzel text-4xl text-gold block mb-4">2022</span>
+                            <h4 class="font-cinzel text-2xl text-white mb-4">Completing Football</h4>
+                            <p class="text-gray-400 font-light text-sm leading-relaxed">
+                                The ghost of Maracanã was buried in Lusail. In the greatest final ever played, Messi willed Argentina to their third star, lifting the World Cup and cementing his status as the eternal GOAT.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="glory" class="py-32 bg-ink-900 relative">
+            <!-- Background Image Faded -->
+            <div class="absolute inset-0 z-0 opacity-10">
+                 <!-- Real Image: Crowd/Stadium for atmosphere -->
+                 <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Messi_vs_Nigeria_2018.jpg" alt="Stadium Atmosphere" class="w-full h-full object-cover filter grayscale blur-sm">
+                 <div class="absolute inset-0 bg-gradient-to-b from-ink-900 via-transparent to-ink-900"></div>
+            </div>
+
+            <div class="container mx-auto px-6 md:px-12 relative z-10">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-20 reveal-up">
+                    <div>
+                        <h2 class="font-cinzel text-4xl md:text-6xl font-black text-white">THE NUMBERS</h2>
+                        <h3 class="font-cinzel text-xl text-gold-light mt-2 italic">A Statistical Anomaly</h3>
+                    </div>
+                    <p class="text-gray-500 font-light text-sm max-w-sm mt-6 md:mt-0">Records that transcended human limits, defining an epoch of sporting excellence that may never be replicated.</p>
+                </div>
+
+                <!-- Bento-style Grid Layout -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
+                    
+                    <!-- Large Feature Block -->
+                    <div class="md:col-span-2 bg-ink-800 p-10 md:p-16 border border-ink-700 relative overflow-hidden reveal-up stagger-1 group">
+                        <div class="relative z-10">
+                            <span class="text-7xl md:text-9xl font-cinzel text-transparent font-black" style="-webkit-text-stroke: 1px #C5A059;">8</span>
+                            <h4 class="font-cinzel text-2xl text-white mt-4 uppercase tracking-widest">Ballon d'Ors</h4>
+                            <p class="text-gray-400 font-light mt-4 max-w-md">The undisputed king of individual accolades. Recognized globally as the best player in the world across three different decades.</p>
+                        </div>
+                        <!-- Decorative element -->
+                        <div class="absolute -bottom-20 -right-20 w-64 h-64 border-[1px] border-gold rounded-full opacity-10 group-hover:scale-150 transition-transform duration-1000"></div>
+                        <div class="absolute -bottom-10 -right-10 w-48 h-48 border-[1px] border-gold rounded-full opacity-20 group-hover:scale-125 transition-transform duration-700"></div>
+                    </div>
+
+                    <!-- Side Blocks -->
+                    <div class="flex flex-col gap-4 md:gap-8 reveal-up stagger-2">
+                        <div class="bg-ink-800 p-8 border border-ink-700 flex-1 flex flex-col justify-center hover:border-gold-muted transition-colors">
+                            <span class="text-4xl font-cinzel text-gold-light mb-2">44</span>
+                            <h4 class="font-cinzel text-sm text-white uppercase tracking-widest">Team Trophies</h4>
+                            <p class="text-xs text-gray-500 mt-2">The most decorated player in history.</p>
+                        </div>
+                        <div class="bg-ink-800 p-8 border border-ink-700 flex-1 flex flex-col justify-center hover:border-gold-muted transition-colors">
+                            <span class="text-4xl font-cinzel text-gold-light mb-2">126</span>
+                            <h4 class="font-cinzel text-sm text-white uppercase tracking-widest">Int'l Goals</h4>
+                            <p class="text-xs text-gray-500 mt-2">Argentina's ultimate talisman.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tribute-video" class="py-32 bg-[#050505] relative border-t border-ink-800">
+            <div class="container mx-auto px-6 md:px-12 relative z-10 flex flex-col items-center justify-center">
+                <div class="text-center mb-16 reveal-up">
+                    <h2 class="font-cinzel text-3xl md:text-5xl font-black text-gold-light drop-shadow-[0_0_20px_rgba(197,160,89,0.5)]">
+                        For the Idol of Millions
+                    </h2>
+                    <div class="w-16 h-[1px] bg-gold-dark mx-auto mt-8"></div>
+                </div>
+                
+                <div class="w-full max-w-4xl mx-auto reveal-up stagger-1">
+                    <div class="rounded-2xl overflow-hidden border border-gold-dark/40 shadow-[0_0_40px_rgba(197,160,89,0.15)] bg-ink-900 transition-all duration-500 hover:shadow-[0_0_50px_rgba(197,160,89,0.3)]">
+                        <video 
+                            controls 
+                            class="w-full h-auto aspect-video object-cover outline-none"
+                            poster="POSTER.jpg">
+                            <source src="♫ LIONEL MESSI_ THE LAST DANCE _ Argentina Song .mp4" type="video/mp4">
+                            Your browser does not support the HTML5 video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-40 bg-[#030303] relative border-t border-ink-800 overflow-hidden text-center flex flex-col items-center justify-center">
+            <div class="container mx-auto px-6 relative z-10 reveal-up">
+                <div class="w-16 h-16 mx-auto border border-gold-dark rounded-full flex items-center justify-center mb-12">
+                    <span class="font-cinzel text-2xl text-gold-light">10</span>
+                </div>
+                
+                <h2 class="font-cinzel text-3xl md:text-5xl text-white font-normal leading-relaxed max-w-4xl mx-auto mb-16 italic">
+                    "I have nothing left to dream of.<br>Thank you, football."
+                </h2>
+                
+                <div class="flex items-center justify-center gap-6 mb-20">
+                    <div class="w-12 h-[1px] bg-ink-700"></div>
+                    <span class="text-gold font-cinzel text-xs tracking-[0.5em] uppercase">October 2026</span>
+                    <div class="w-12 h-[1px] bg-ink-700"></div>
+                </div>
+
+                <p class="text-gold-light font-cinzel text-[12vw] md:text-[8vw] font-black leading-none select-none drop-shadow-[0_0_30px_rgba(197,160,89,0.6)] mb-20">GRACIAS LEO</p>
+
+                <div class="flex flex-col items-center justify-center gap-4 text-gray-500 font-montserrat text-xs tracking-wider border-t border-ink-800 pt-12 mt-8 max-w-2xl mx-auto">
+                    <p>Video courtesy of Music Football (YouTube)</p>
+                    <div class="flex items-center justify-center gap-4">
+                        <span class="uppercase">Website created by</span>
+                        <a href="https://github.com/Sohan010-dev" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" title="GitHub">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/sohanbanerjee-offcl/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-[#0a66c2] transition-colors" title="LinkedIn">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Intersection Observer for graceful reveal animations
+            const revealElements = document.querySelectorAll('.reveal-up, .reveal-scale');
+
+            const revealOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        observer.unobserve(entry.target); // Only animate once for editorial feel
+                    }
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
+
+            // Navbar Blur Effect on Scroll
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('backdrop-blur-md', 'bg-ink-900/80', 'border-b', 'border-ink-800');
+                    navbar.classList.remove('mix-blend-difference');
+                } else {
+                    navbar.classList.remove('backdrop-blur-md', 'bg-ink-900/80', 'border-b', 'border-ink-800');
+                    navbar.classList.add('mix-blend-difference');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
